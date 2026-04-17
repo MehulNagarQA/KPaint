@@ -52,7 +52,7 @@ const Wishlist: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className="text-center py-20 bg-[#12121a] rounded-2xl border border-[#2a2a40]">
+        <div className="text-center py-20 bg-[#242526] rounded-2xl border border-[#3e4042]">
           <h3 className="text-2xl font-semibold text-white mb-2">No saved artworks yet</h3>
           <p className="text-gray-400 mb-6">Explore the gallery and add paintings you love to your wishlist.</p>
           <Link to="/gallery" className="btn-primary">Explore Gallery</Link>

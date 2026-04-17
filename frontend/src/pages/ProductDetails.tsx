@@ -62,14 +62,14 @@ const ProductDetails: React.FC = () => {
 
   return (
     <div className="pt-28 pb-20 max-w-7xl mx-auto px-6">
-      <Link to="/gallery" className="inline-flex items-center gap-2 text-gray-400 hover:text-[#c9a84c] mb-8 transition-colors">
+      <Link to="/gallery" className="inline-flex items-center gap-2 text-gray-400 hover:text-[#1877F2] mb-8 transition-colors">
         <ArrowLeft className="w-5 h-5" /> Back to Gallery
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
         
         {/* Left: Image Viewer */}
-        <div className="relative group rounded-2xl overflow-hidden glass border-white/5 bg-[#0a0a0f] p-2 hover:border-[#c9a84c]/30 transition-colors">
+        <div className="relative group rounded-2xl overflow-hidden glass border-white/5 bg-[#18191a] p-2 hover:border-[#1877F2]/30 transition-colors">
           <img 
             src={painting.image} 
             alt={painting.title} 
@@ -80,7 +80,7 @@ const ProductDetails: React.FC = () => {
         {/* Right: Details */}
         <div className="flex flex-col justify-center">
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-[#c9a84c] font-medium tracking-wider uppercase text-sm">{painting.category}</span>
+            <span className="text-[#1877F2] font-medium tracking-wider uppercase text-sm">{painting.category}</span>
             {painting.stock > 0 ? (
               <span className="flex items-center gap-1 text-green-400 text-sm font-medium"><CheckCircle2 className="w-4 h-4"/> In Stock</span>
             ) : (
@@ -100,7 +100,7 @@ const ProductDetails: React.FC = () => {
           </p>
 
           {(painting.dimensions || painting.medium) && (
-            <div className="grid grid-cols-2 gap-4 mb-10 py-6 border-y border-[#2a2a40]">
+            <div className="grid grid-cols-2 gap-4 mb-10 py-6 border-y border-[#3e4042]">
               {painting.dimensions && (
                 <div>
                   <div className="text-gray-500 text-sm flex items-center gap-2 mb-1"><Ruler className="w-4 h-4" /> Dimensions</div>
@@ -120,19 +120,19 @@ const ProductDetails: React.FC = () => {
             <button 
               onClick={handleAddToCart}
               disabled={painting.stock < 1}
-              className={`flex-1 py-4 flex items-center justify-center text-lg ${painting.stock < 1 ? 'bg-[#2a2a40] text-gray-500 cursor-not-allowed rounded-xl font-semibold' : 'btn-primary'}`}
+              className={`flex-1 py-4 flex items-center justify-center text-lg ${painting.stock < 1 ? 'bg-[#3a3b3c] text-gray-500 cursor-not-allowed rounded-xl font-semibold' : 'btn-primary'}`}
             >
               <ShoppingBag className="w-5 h-5 mr-2" /> {painting.stock < 1 ? 'Sold Out' : 'Add to Collection'}
             </button>
             <button 
               onClick={handleWishlist}
-              className={`btn-secondary py-4 px-6 flex justify-center !border-[#2a2a40] hover:!border-[#c9a84c] ${isWishlisted ? 'text-[#c9a84c] bg-[#c9a84c]/10' : 'text-white'}`}
+              className={`btn-secondary py-4 px-6 flex justify-center !border-[#3e4042] hover:!border-[#1877F2] ${isWishlisted ? 'text-[#1877F2] bg-[#1877F2]/10' : 'text-white'}`}
             >
-              <Heart className={`w-6 h-6 ${isWishlisted ? 'fill-[#c9a84c]' : ''}`} />
+              <Heart className={`w-6 h-6 ${isWishlisted ? 'fill-[#1877F2]' : ''}`} />
             </button>
           </div>
 
-          <div className="mt-8 text-sm text-gray-500 bg-[#12121a] p-4 rounded-xl border border-[#2a2a40]">
+          <div className="mt-8 text-sm text-gray-500 bg-[#242526] p-4 rounded-xl border border-[#3e4042]">
             <p className="mb-2">✓ Free secure international shipping</p>
             <p className="mb-2">✓ Certificate of Authenticity included</p>
             <p>✓ 14-day return policy</p>

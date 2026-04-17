@@ -120,11 +120,11 @@ const AdminDashboard: React.FC = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="glass rounded-xl border border-[#2a2a40] overflow-hidden bg-[#12121a]">
+        <div className="glass rounded-xl border border-[#3e4042] overflow-hidden bg-[#242526]">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-[#1a1a28] border-b border-[#2a2a40]">
+                <tr className="bg-[#1c1e21] border-b border-[#3e4042]">
                   <th className="p-4 font-semibold text-gray-300">Image</th>
                   <th className="p-4 font-semibold text-gray-300">Title</th>
                   <th className="p-4 font-semibold text-gray-300">Artist</th>
@@ -135,13 +135,13 @@ const AdminDashboard: React.FC = () => {
               </thead>
               <tbody>
                 {paintings.map((painting) => (
-                  <tr key={painting._id} className="border-b border-[#2a2a40] hover:bg-white/5 transition-colors">
+                  <tr key={painting._id} className="border-b border-[#3e4042] hover:bg-white/5 transition-colors">
                     <td className="p-4">
                       <img src={painting.image} alt={painting.title} className="w-12 h-12 object-cover rounded shadow-md" />
                     </td>
                     <td className="p-4 font-medium text-white">{painting.title}</td>
                     <td className="p-4 text-gray-400">{painting.artist}</td>
-                    <td className="p-4 text-[#c9a84c] font-medium">${painting.price.toLocaleString()}</td>
+                    <td className="p-4 text-[#1877F2] font-medium">${painting.price.toLocaleString()}</td>
                     <td className="p-4">
                       {painting.stock > 0 ? (
                         <span className="text-green-400">{painting.stock}</span>
@@ -173,8 +173,8 @@ const AdminDashboard: React.FC = () => {
       {/* Add Painting Modal */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="bg-[#12121a] border border-[#2a2a40] rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl glass">
-            <div className="p-6 border-b border-[#2a2a40] flex justify-between items-center sticky top-0 bg-[#12121a]/90 backdrop-blur">
+          <div className="bg-[#242526] border border-[#3e4042] rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl glass">
+            <div className="p-6 border-b border-[#3e4042] flex justify-between items-center sticky top-0 bg-[#242526]/90 backdrop-blur">
               <h2 className="text-xl font-bold text-white">Add New Artwork</h2>
               <button onClick={() => setShowAddModal(false)} className="text-gray-400 hover:text-white">
                 <X className="w-6 h-6" />
@@ -193,7 +193,7 @@ const AdminDashboard: React.FC = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">Category</label>
-                  <select name="category" required className="input-field bg-[#12121a]">
+                  <select name="category" required className="input-field bg-[#242526]">
                     {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
@@ -215,19 +215,19 @@ const AdminDashboard: React.FC = () => {
                 </div>
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-300 mb-2">Image Upload</label>
-                  <div className="border-2 border-dashed border-[#2a2a40] rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-[#c9a84c] transition-colors relative">
+                  <div className="border-2 border-dashed border-[#3e4042] rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-[#1877F2] transition-colors relative">
                     <ImageIcon className="w-10 h-10 text-gray-500 mb-2" />
                     <span className="text-gray-400">Click to upload image</span>
                     <input type="file" name="image" accept="image/*" required className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
                   </div>
                 </div>
                 <div className="md:col-span-2 flex items-center gap-2">
-                  <input type="checkbox" name="featured" id="featured" className="w-4 h-4 rounded bg-[#12121a] border-[#2a2a40] text-[#c9a84c] focus:ring-[#c9a84c]" value="true" />
+                  <input type="checkbox" name="featured" id="featured" className="w-4 h-4 rounded bg-[#242526] border-[#3e4042] text-[#1877F2] focus:ring-[#1877F2]" value="true" />
                   <label htmlFor="featured" className="text-sm font-medium text-gray-300">Feature this artwork on the home page</label>
                 </div>
               </div>
 
-              <div className="flex justify-end gap-4 pt-4 border-t border-[#2a2a40]">
+              <div className="flex justify-end gap-4 pt-4 border-t border-[#3e4042]">
                 <button type="button" onClick={() => setShowAddModal(false)} className="btn-secondary">Cancel</button>
                 <button type="submit" disabled={uploading} className="btn-primary">
                   {uploading ? 'Uploading...' : 'Save Artwork'}
@@ -241,8 +241,8 @@ const AdminDashboard: React.FC = () => {
       {/* Edit Painting Modal */}
       {showEditModal && editingPainting && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="bg-[#12121a] border border-[#2a2a40] rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl glass">
-            <div className="p-6 border-b border-[#2a2a40] flex justify-between items-center sticky top-0 bg-[#12121a]/90 backdrop-blur">
+          <div className="bg-[#242526] border border-[#3e4042] rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl glass">
+            <div className="p-6 border-b border-[#3e4042] flex justify-between items-center sticky top-0 bg-[#242526]/90 backdrop-blur">
               <h2 className="text-xl font-bold text-white">Edit Artwork</h2>
               <button onClick={() => {setShowEditModal(false); setEditingPainting(null);}} className="text-gray-400 hover:text-white">
                 <X className="w-6 h-6" />
@@ -261,7 +261,7 @@ const AdminDashboard: React.FC = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">Category</label>
-                  <select name="category" defaultValue={editingPainting.category} required className="input-field bg-[#12121a]">
+                  <select name="category" defaultValue={editingPainting.category} required className="input-field bg-[#242526]">
                     {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
@@ -283,19 +283,19 @@ const AdminDashboard: React.FC = () => {
                 </div>
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-300 mb-2">Replace Image (Optional)</label>
-                  <div className="border-2 border-dashed border-[#2a2a40] rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-[#c9a84c] transition-colors relative">
+                  <div className="border-2 border-dashed border-[#3e4042] rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-[#1877F2] transition-colors relative">
                     <ImageIcon className="w-10 h-10 text-gray-500 mb-2" />
                     <span className="text-gray-400">Select new file to overwrite current image</span>
                     <input type="file" name="image" accept="image/*" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
                   </div>
                 </div>
                 <div className="md:col-span-2 flex items-center gap-2">
-                  <input type="checkbox" name="featured" id="edit-featured" defaultChecked={editingPainting.featured} className="w-4 h-4 rounded bg-[#12121a] border-[#2a2a40] text-[#c9a84c] focus:ring-[#c9a84c]" value="true" />
+                  <input type="checkbox" name="featured" id="edit-featured" defaultChecked={editingPainting.featured} className="w-4 h-4 rounded bg-[#242526] border-[#3e4042] text-[#1877F2] focus:ring-[#1877F2]" value="true" />
                   <label htmlFor="edit-featured" className="text-sm font-medium text-gray-300">Feature this artwork on the home page</label>
                 </div>
               </div>
 
-              <div className="flex justify-end gap-4 pt-4 border-t border-[#2a2a40]">
+              <div className="flex justify-end gap-4 pt-4 border-t border-[#3e4042]">
                 <button type="button" onClick={() => {setShowEditModal(false); setEditingPainting(null);}} className="btn-secondary">Cancel</button>
                 <button type="submit" disabled={uploading} className="btn-primary">
                   {uploading ? 'Updating...' : 'Update Artwork'}

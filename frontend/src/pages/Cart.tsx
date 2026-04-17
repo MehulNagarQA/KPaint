@@ -74,7 +74,7 @@ const Cart: React.FC = () => {
         {/* Cart Items */}
         <div className="lg:col-span-2 space-y-6">
           {cart.items.map((item) => (
-            <div key={item.painting._id} className="flex flex-col sm:flex-row items-center gap-6 p-4 glass rounded-xl border border-white/5 bg-[#12121a]">
+            <div key={item.painting._id} className="flex flex-col sm:flex-row items-center gap-6 p-4 glass rounded-xl border border-[#3e4042] bg-[#242526]">
               <img 
                 src={item.painting.image} 
                 alt={item.painting.title} 
@@ -82,25 +82,25 @@ const Cart: React.FC = () => {
               />
               
               <div className="flex-1 text-center sm:text-left">
-                <Link to={`/gallery/${item.painting._id}`} className="text-xl font-bold hover:text-[#c9a84c] transition-colors">
+                <Link to={`/gallery/${item.painting._id}`} className="text-xl font-bold hover:text-[#1877F2] transition-colors">
                   {item.painting.title}
                 </Link>
                 <p className="text-gray-400 text-sm mt-1">{item.painting.artist}</p>
-                <p className="text-[#c9a84c] font-bold mt-2">${item.price.toLocaleString()}</p>
+                <p className="text-[#1877F2] font-bold mt-2">${item.price.toLocaleString()}</p>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="flex items-center bg-[#0a0a0f] rounded-lg border border-[#2a2a40]">
+                <div className="flex items-center bg-[#18191a] rounded-lg border border-[#3e4042]">
                   <button 
                     onClick={() => updateQuantity(item.painting._id, Math.max(1, item.quantity - 1))}
-                    className="p-2 hover:text-[#c9a84c] transition-colors"
+                    className="p-2 hover:text-[#1877F2] transition-colors"
                   >
                     <Minus className="w-4 h-4" />
                   </button>
                   <span className="w-8 text-center font-medium">{item.quantity}</span>
                   <button 
                     onClick={() => updateQuantity(item.painting._id, item.quantity + 1)}
-                    className="p-2 hover:text-[#c9a84c] transition-colors"
+                    className="p-2 hover:text-[#1877F2] transition-colors"
                   >
                     <Plus className="w-4 h-4" />
                   </button>
@@ -119,7 +119,7 @@ const Cart: React.FC = () => {
 
         {/* Order Summary */}
         <div className="lg:col-span-1">
-          <div className="glass p-8 rounded-2xl border border-[#2a2a40] sticky top-28 bg-[#12121a]">
+          <div className="glass p-8 rounded-2xl border border-[#3e4042] sticky top-28 bg-[#242526]">
             <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
             
             <div className="space-y-4 mb-6 text-gray-300">
@@ -137,10 +137,10 @@ const Cart: React.FC = () => {
               </div>
             </div>
 
-            <div className="border-t border-[#2a2a40] pt-4 mb-8">
+            <div className="border-t border-[#3e4042] pt-4 mb-8">
               <div className="flex justify-between items-center text-xl font-bold">
                 <span>Total</span>
-                <span className="text-[#c9a84c]">${cart.totalPrice.toLocaleString()}</span>
+                <span className="text-[#1877F2]">${cart.totalPrice.toLocaleString()}</span>
               </div>
             </div>
 

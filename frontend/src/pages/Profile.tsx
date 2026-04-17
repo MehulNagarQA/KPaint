@@ -41,8 +41,8 @@ const Profile: React.FC = () => {
     <div className="pt-28 pb-20 max-w-5xl mx-auto px-6">
       
       {/* Profile Header */}
-      <div className="glass p-8 rounded-2xl mb-12 flex flex-col md:flex-row items-center gap-6 text-center md:text-left bg-[#12121a]">
-        <div className="w-20 h-20 rounded-full bg-[#2a2a40] flex items-center justify-center text-3xl font-bold text-[#c9a84c]">
+      <div className="glass p-8 rounded-2xl mb-12 flex flex-col md:flex-row items-center gap-6 text-center md:text-left bg-[#242526]">
+        <div className="w-20 h-20 rounded-full bg-[#3a3b3c] flex items-center justify-center text-3xl font-bold text-[#1877F2]">
           {user?.name.charAt(0)}
         </div>
         <div>
@@ -56,7 +56,7 @@ const Profile: React.FC = () => {
       {loading ? (
         <Loader />
       ) : orders.length === 0 ? (
-        <div className="text-center py-16 glass rounded-2xl border border-[#2a2a40] bg-[#12121a]">
+        <div className="text-center py-16 glass rounded-2xl border border-[#3e4042] bg-[#242526]">
           <h3 className="text-xl text-white mb-2">No orders placed yet</h3>
           <p className="text-gray-400 mb-6">Start building your exclusive fine art collection today.</p>
           <Link to="/gallery" className="btn-primary">Explore the Gallery</Link>
@@ -64,18 +64,18 @@ const Profile: React.FC = () => {
       ) : (
         <div className="space-y-6">
           {orders.map((order) => (
-            <div key={order._id} className="glass rounded-xl border border-[#2a2a40] overflow-hidden bg-[#12121a]">
+            <div key={order._id} className="glass rounded-xl border border-[#3e4042] overflow-hidden bg-[#242526]">
               
-              <div className="bg-[#1a1a28] px-6 py-4 border-b border-[#2a2a40] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="bg-[#1c1e21] px-6 py-4 border-b border-[#3e4042] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <p className="text-sm text-gray-400 mb-1">
                     Order Placed: <span className="text-white">{new Date(order.createdAt).toLocaleDateString()}</span>
                   </p>
                   <p className="text-sm text-gray-400">
-                    Total: <span className="text-[#c9a84c] font-bold">${order.totalPrice.toLocaleString()}</span>
+                    Total: <span className="text-[#1877F2] font-bold">${order.totalPrice.toLocaleString()}</span>
                   </p>
                 </div>
-                <div className="flex items-center gap-2 capitalize font-medium text-sm px-3 py-1.5 rounded-full bg-[#0a0a0f] border border-[#2a2a40]">
+                <div className="flex items-center gap-2 capitalize font-medium text-sm px-3 py-1.5 rounded-full bg-[#18191a] border border-[#3e4042]">
                   {getStatusIcon(order.status)}
                   {order.status}
                 </div>
@@ -93,7 +93,7 @@ const Profile: React.FC = () => {
                             className="w-16 h-16 object-cover rounded shadow-md"
                           />
                           <div className="flex-1">
-                            <Link to={`/gallery/${item.painting._id}`} className="text-white hover:text-[#c9a84c] transition-colors font-medium">
+                            <Link to={`/gallery/${item.painting._id}`} className="text-white hover:text-[#1877F2] transition-colors font-medium">
                               {item.painting.title}
                             </Link>
                             <div className="text-sm text-gray-400">Qty: {item.quantity}</div>

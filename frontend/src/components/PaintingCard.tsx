@@ -45,10 +45,10 @@ const PaintingCard: React.FC<Props> = ({ painting }) => {
 
   return (
     <Link to={`/gallery/${painting._id}`} className="block group">
-      <div className="card h-full flex flex-col hover-lift bg-[#12121a]">
+      <div className="card h-full flex flex-col hover-lift bg-[#242526]">
         
         {/* Image Container */}
-        <div className="relative aspect-[4/5] overflow-hidden bg-[#0a0a0f]">
+        <div className="relative aspect-[4/5] overflow-hidden bg-[#18191a]">
           <img
             src={painting.image}
             alt={painting.title}
@@ -57,19 +57,19 @@ const PaintingCard: React.FC<Props> = ({ painting }) => {
           />
           
           {/* Overlay Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent opacity-60"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#18191a] via-transparent to-transparent opacity-60"></div>
           
           {/* Badges */}
           <div className="absolute top-4 left-4 flex flex-col gap-2">
-            {painting.featured && <span className="badge badge-gold">Featured</span>}
-            {painting.stock === 0 && <span className="badge bg-red-900/80 text-red-100 gold-border">Out of Stock</span>}
+            {painting.featured && <span className="badge badge-accent">Featured</span>}
+            {painting.stock === 0 && <span className="badge bg-red-900/80 text-red-100 accent-border">Out of Stock</span>}
           </div>
 
           <button
             onClick={handleWishlist}
             className="absolute top-4 right-4 p-2 rounded-full glass hover:bg-white/10 transition-colors z-10"
           >
-            <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-[#c9a84c] text-[#c9a84c]' : 'text-white'}`} />
+            <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-[#1877F2] text-[#1877F2]' : 'text-white'}`} />
           </button>
 
           {/* Quick Actions overlay */}
@@ -90,8 +90,8 @@ const PaintingCard: React.FC<Props> = ({ painting }) => {
         <div className="p-5 flex-1 flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-start mb-2">
-              <h3 className="text-xl font-bold text-white group-hover:text-[#c9a84c] transition-colors line-clamp-1">{painting.title}</h3>
-              <span className="text-[#c9a84c] font-bold text-lg">${painting.price.toLocaleString()}</span>
+              <h3 className="text-xl font-bold text-white group-hover:text-[#1877F2] transition-colors line-clamp-1">{painting.title}</h3>
+              <span className="text-[#1877F2] font-bold text-lg">${painting.price.toLocaleString()}</span>
             </div>
             <p className="text-gray-400 text-sm mb-4 line-clamp-2">{painting.description}</p>
           </div>

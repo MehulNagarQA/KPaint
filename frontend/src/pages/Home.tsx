@@ -31,17 +31,17 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          {/* Abstract dark gradient background */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1a1a28] via-[#0a0a0f] to-[#0a0a0f]"></div>
+          {/* Abstract dark blue gradient background */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#242526] via-[#18191a] to-[#18191a]"></div>
           {/* Decorative glowing orbs */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#c9a84c] rounded-full mix-blend-screen filter blur-[120px] opacity-10"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#a67c52] rounded-full mix-blend-screen filter blur-[120px] opacity-10"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#1877F2] rounded-full mix-blend-screen filter blur-[120px] opacity-10"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#2d88ff] rounded-full mix-blend-screen filter blur-[120px] opacity-10"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-fade-in-up">
-            <Brush className="w-4 h-4 text-[#c9a84c]" />
-            <span className="text-sm font-medium tracking-wider uppercase text-[#c9a84c]">Discover Mastery</span>
+            <Brush className="w-4 h-4 text-[#1877F2]" />
+            <span className="text-sm font-medium tracking-wider uppercase text-[#1877F2]">Discover Mastery</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6">
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
             <Link to="/gallery" className="btn-primary text-lg px-8 py-4">
               Explore Gallery <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link to="/about" className="btn-secondary text-lg px-8 py-4 border-transparent hover:border-[#c9a84c]">
+            <Link to="/about" className="btn-secondary text-lg px-8 py-4 border-transparent hover:border-[#1877F2]">
               Our Philosophy
             </Link>
           </div>
@@ -74,7 +74,7 @@ const Home: React.FC = () => {
                 Hand-picked selections representing the pinnacle of artistic achievement in our current exhibition.
               </p>
             </div>
-            <Link to="/gallery" className="hidden md:flex items-center gap-2 text-[#c9a84c] hover:text-[#e8c97a] transition-colors font-medium">
+            <Link to="/gallery" className="hidden md:flex items-center gap-2 text-[#1877F2] hover:text-[#2d88ff] transition-colors font-medium">
               View All <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

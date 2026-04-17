@@ -32,16 +32,16 @@ const Login: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center pt-20 pb-10 px-6 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1a1a28] via-[#0a0a0f] to-[#0a0a0f] z-0"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#242526] via-[#18191a] to-[#18191a] z-0"></div>
       
       <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-10">
-          <Palette className="w-12 h-12 text-[#c9a84c] mx-auto mb-4" />
+          <Palette className="w-12 h-12 text-[#1877F2] mx-auto mb-4" />
           <h1 className="text-3xl font-bold text-white mb-2">Sign into KPaint</h1>
           <p className="text-gray-400">Access your private collection & orders</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="glass p-8 rounded-2xl border-[#2a2a40] space-y-6">
+        <form onSubmit={handleSubmit} className="glass p-8 rounded-2xl border-[#3e4042] space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
             <div className="relative">
@@ -83,7 +83,7 @@ const Login: React.FC = () => {
 
         <p className="text-center mt-6 text-gray-400">
           New to KPaint?{' '}
-          <Link to="/register" className="text-[#c9a84c] hover:text-white transition-colors font-medium">
+          <Link to="/register" className="text-[#1877F2] hover:text-white transition-colors font-medium">
             Create an account
           </Link>
         </p>

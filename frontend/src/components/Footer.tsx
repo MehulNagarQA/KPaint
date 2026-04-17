@@ -13,17 +13,17 @@ const Footer: React.FC = () => {
         <div>
           <h4 className="text-white font-semibold mb-4">Explore</h4>
           <ul className="space-y-2 text-gray-400">
-            <li><a href="/gallery" className="hover:text-[#c9a84c] transition-colors">Gallery</a></li>
-            <li><a href="#" className="hover:text-[#c9a84c] transition-colors">Artists</a></li>
-            <li><a href="#" className="hover:text-[#c9a84c] transition-colors">Exhibitions</a></li>
+            <li><a href="/gallery" className="hover:text-[#1877F2] transition-colors">Gallery</a></li>
+            <li><a href="#" className="hover:text-[#1877F2] transition-colors">Artists</a></li>
+            <li><a href="#" className="hover:text-[#1877F2] transition-colors">Exhibitions</a></li>
           </ul>
         </div>
         <div>
           <h4 className="text-white font-semibold mb-4">Legal</h4>
           <ul className="space-y-2 text-gray-400">
-            <li><a href="#" className="hover:text-[#c9a84c] transition-colors">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-[#c9a84c] transition-colors">Terms of Service</a></li>
-            <li><a href="#" className="hover:text-[#c9a84c] transition-colors">Returns</a></li>
+            <li><a href="#" className="hover:text-[#1877F2] transition-colors">Privacy Policy</a></li>
+            <li><a href="#" className="hover:text-[#1877F2] transition-colors">Terms of Service</a></li>
+            <li><a href="#" className="hover:text-[#1877F2] transition-colors">Returns</a></li>
           </ul>
         </div>
       </div>

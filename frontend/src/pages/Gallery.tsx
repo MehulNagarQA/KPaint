@@ -94,7 +94,7 @@ const Gallery: React.FC = () => {
                 name="search"
                 placeholder="Search artworks..." 
                 defaultValue={searchParams.get('search') || ''}
-                className="input-field pl-10 bg-[#12121a]"
+                className="input-field pl-10 bg-[#242526]"
               />
             </div>
             
@@ -103,20 +103,20 @@ const Gallery: React.FC = () => {
               name="minPrice"
               placeholder="Min $" 
               defaultValue={searchParams.get('minPrice') || ''}
-              className="input-field bg-[#12121a] w-24 hidden md:block"
+              className="input-field bg-[#242526] w-24 hidden md:block"
             />
             <input 
               type="number" 
               name="maxPrice"
               placeholder="Max $" 
               defaultValue={searchParams.get('maxPrice') || ''}
-              className="input-field bg-[#12121a] w-24 hidden md:block"
+              className="input-field bg-[#242526] w-24 hidden md:block"
             />
             <button type="submit" className="hidden" />
           </form>
           <button 
             onClick={() => setShowFilters(!showFilters)}
-            className={`p-3 rounded-lg border transition-colors ${showFilters ? 'bg-[#c9a84c] text-black border-[#c9a84c]' : 'glass border-[#2a2a40] text-gray-300 hover:text-white'}`}
+            className={`p-3 rounded-lg border transition-colors ${showFilters ? 'bg-[#1877F2] text-white border-[#1877F2]' : 'glass border-[#3e4042] text-gray-300 hover:text-white'}`}
           >
             {showFilters ? <X className="w-5 h-5" /> : <Filter className="w-5 h-5" />}
           </button>
@@ -133,8 +133,8 @@ const Gallery: React.FC = () => {
                 onClick={() => setCategoryFilter(cat)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   currentCategory === cat 
-                    ? 'bg-[#c9a84c] text-black' 
-                    : 'bg-[#12121a] text-gray-300 border border-[#2a2a40] hover:border-[#c9a84c] hover:text-white'
+                    ? 'bg-[#1877F2] text-white' 
+                    : 'bg-[#242526] text-gray-300 border border-[#3e4042] hover:border-[#1877F2] hover:text-white'
                 }`}
               >
                 {cat}
@@ -162,8 +162,8 @@ const Gallery: React.FC = () => {
                 disabled={currentPage === 1}
                 className={`p-2 rounded-lg border transition-colors ${
                   currentPage === 1 
-                    ? 'bg-transparent border-[#2a2a40] text-gray-600 cursor-not-allowed' 
-                    : 'glass border-[#2a2a40] text-gray-300 hover:text-white hover:border-[#c9a84c]'
+                    ? 'bg-transparent border-[#3e4042] text-gray-600 cursor-not-allowed' 
+                    : 'glass border-[#3e4042] text-gray-300 hover:text-white hover:border-[#1877F2]'
                 }`}
               >
                 <ChevronLeft className="w-6 h-6" />
@@ -178,8 +178,8 @@ const Gallery: React.FC = () => {
                 disabled={currentPage === totalPages}
                 className={`p-2 rounded-lg border transition-colors ${
                   currentPage === totalPages 
-                    ? 'bg-transparent border-[#2a2a40] text-gray-600 cursor-not-allowed' 
-                    : 'glass border-[#2a2a40] text-gray-300 hover:text-white hover:border-[#c9a84c]'
+                    ? 'bg-transparent border-[#3e4042] text-gray-600 cursor-not-allowed' 
+                    : 'glass border-[#3e4042] text-gray-300 hover:text-white hover:border-[#1877F2]'
                 }`}
               >
                 <ChevronRight className="w-6 h-6" />
@@ -188,7 +188,7 @@ const Gallery: React.FC = () => {
           )}
         </>
       ) : (
-        <div className="text-center py-20 bg-[#12121a] rounded-2xl border border-[#2a2a40]">
+        <div className="text-center py-20 bg-[#18191a] rounded-2xl border border-[#3e4042]">
           <h3 className="text-2xl font-semibold text-white mb-2">No artworks found</h3>
           <p className="text-gray-400">Try adjusting your search or filters to find what you're looking for.</p>
           {(searchParams.has('search') || searchParams.has('category')) && (

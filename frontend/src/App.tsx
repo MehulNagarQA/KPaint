@@ -43,7 +43,7 @@ const App: React.FC = () => {
           },
           success: {
             iconTheme: {
-              primary: '#c9a84c',
+              primary: '#1877F2',
               secondary: '#12121a',
             },
           },
