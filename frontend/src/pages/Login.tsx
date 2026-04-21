@@ -31,62 +31,85 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center pt-20 pb-10 px-6 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#242526] via-[#18191a] to-[#18191a] z-0"></div>
+    <div className="min-h-screen flex items-center justify-center pt-20 pb-10 px-6 relative overflow-hidden">
+      {/* Dynamic Background */}
+      <div className="absolute inset-0 bg-[#0a0a0f] z-0">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#1877F2]/10 blur-[120px] rounded-full animate-pulse"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#2d88ff]/5 blur-[120px] rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+      </div>
       
       <div className="relative z-10 w-full max-w-md">
-        <div className="text-center mb-10">
-          <Palette className="w-12 h-12 text-[#1877F2] mx-auto mb-4" />
-          <h1 className="text-3xl font-bold text-white mb-2">Sign into KPaint</h1>
-          <p className="text-gray-400">Access your private collection & orders</p>
+        <div className="text-center mb-8 animate-fade-in">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-[#18191a] to-[#242526] border border-[#3e4042] mb-6 shadow-xl transform transition-transform hover:scale-105">
+            <Palette className="w-10 h-10 text-[#1877F2]" />
+          </div>
+          <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">Welcome Back</h1>
+          <p className="text-gray-400 font-medium">Step into your gallery once again</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="glass p-8 rounded-2xl border-[#3e4042] space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+        <form onSubmit={handleSubmit} className="glass p-10 rounded-3xl border-[#3e4042]/50 space-y-6 shadow-2xl animate-slide-up">
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-300 ml-1">Email Address</label>
+            <div className="relative group">
+              <Mail 
+                className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-all duration-300 watermark-icon 
+                  ${email ? 'hidden' : 'text-gray-500 group-focus-within:text-[#1877F2]'}`} 
+              />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input-field pl-10"
-                placeholder="collector@example.com"
+                className={`input-field ${email ? '' : 'input-with-icon'}`}
+                placeholder={email ? '' : 'collector@example.com'}
               />
             </div>
           </div>
           
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-300 ml-1">Password</label>
+            <div className="relative group">
+              <Lock 
+                className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-all duration-300 watermark-icon
+                  ${password ? 'hidden' : 'text-gray-500 group-focus-within:text-[#1877F2]'}`} 
+              />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input-field pl-10"
-                placeholder="••••••••"
+                className={`input-field ${password ? '' : 'input-with-icon'}`}
+                placeholder={password ? '' : '••••••••'}
               />
             </div>
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full btn-primary justify-center text-lg py-3 mt-2"
-          >
-            {loading ? 'Authenticating...' : 'Sign In'}
-          </button>
+          <div className="pt-2">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full btn-primary justify-center text-lg py-3.5 rounded-xl shadow-lg ring-offset-2 ring-offset-[#0a0a0f] focus:ring-2 focus:ring-[#1877F2]/50 transition-all active:scale-95"
+            >
+              {loading ? (
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  <span>Authenticating...</span>
+                </div>
+              ) : (
+                'Sign In'
+              )}
+            </button>
+          </div>
         </form>
 
-        <p className="text-center mt-6 text-gray-400">
-          New to KPaint?{' '}
-          <Link to="/register" className="text-[#1877F2] hover:text-white transition-colors font-medium">
-            Create an account
-          </Link>
-        </p>
+        <div className="text-center mt-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <p className="text-gray-400">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-[#1877F2] hover:text-white transition-all font-semibold underline-offset-4 hover:underline decoration-2">
+              Join the Gallery
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

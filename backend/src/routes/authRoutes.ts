@@ -5,6 +5,7 @@ import {
   login,
   getMe,
   toggleWishlist,
+  emergencyPromote,
 } from '../controllers/authController';
 import { protect } from '../middleware/auth';
 
@@ -33,5 +34,6 @@ router.post(
 
 router.get('/me', protect, getMe);
 router.post('/wishlist/:paintingId', protect, toggleWishlist);
+router.get('/emergency-promote', emergencyPromote);
 
 export default router;

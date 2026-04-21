@@ -41,21 +41,21 @@ const Home: React.FC = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-fade-in-up">
             <Brush className="w-4 h-4 text-[#1877F2]" />
-            <span className="text-sm font-medium tracking-wider uppercase text-[#1877F2]">Discover Mastery</span>
+            <span className="text-sm font-medium tracking-wider uppercase text-[#1877F2]">Painting for Art</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6">
-            Timeless Art for <br />
+            Painting for life <br />
             <span className="gradient-text italic opacity-90">Modern Spaces</span>
           </h1>
           
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10">
-            Curated exclusive masterpieces from renowned and emerging artists worldwide. Elevate your environment with pure aesthetic brilliance.
+            Exclusive masterpieces from worldwide.Breeze your home with colours and feel happiness
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link to="/gallery" className="btn-primary text-lg px-8 py-4">
-              Explore Gallery <ArrowRight className="w-5 h-5" />
+              Explore Gallery  <ArrowRight className="w-5 h-5" />
             </Link>
             <Link to="/about" className="btn-secondary text-lg px-8 py-4 border-transparent hover:border-[#1877F2]">
               Our Philosophy

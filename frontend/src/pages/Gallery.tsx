@@ -5,15 +5,21 @@ import type { Category, Painting } from '../types';
 import { paintingsAPI } from '../api';
 import PaintingCard from '../components/PaintingCard';
 import Loader from '../components/Loader';
+import AddArtworkModal from '../components/AddArtworkModal';
 import { useSearchParams } from 'react-router-dom';
+import { useAuthStore } from '../store/authStore';
+import { Plus } from 'lucide-react';
 
 const Gallery: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [paintings, setPaintings] = useState<Painting[]>([]);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
+  const [showUploadModal, setShowUploadModal] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const { user } = useAuthStore();
+  const isAdmin = user?.role === 'admin';
 
   const fetchPaintings = useCallback(async () => {
     setLoading(true);
@@ -120,6 +126,16 @@ const Gallery: React.FC = () => {
           >
             {showFilters ? <X className="w-5 h-5" /> : <Filter className="w-5 h-5" />}
           </button>
+
+          {isAdmin && (
+            <button 
+              onClick={() => setShowUploadModal(true)}
+              className="flex items-center gap-2 btn-primary px-4 py-3"
+            >
+              <Plus className="w-5 h-5" />
+              <span className="hidden sm:inline">Add Artwork</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -200,6 +216,13 @@ const Gallery: React.FC = () => {
             </button>
           )}
         </div>
+      )}
+
+      {showUploadModal && (
+        <AddArtworkModal 
+          onClose={() => setShowUploadModal(false)} 
+          onSuccess={() => fetchPaintings()} 
+        />
       )}
     </div>
   );
