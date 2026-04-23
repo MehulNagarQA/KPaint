@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Search, Filter, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { CATEGORIES } from '../types';
-import type { Category, Painting } from '../types';
+import type { Painting } from '../types';
 import { paintingsAPI } from '../api';
 import PaintingCard from '../components/PaintingCard';
 import Loader from '../components/Loader';

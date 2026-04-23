@@ -14,7 +14,7 @@ import Wishlist from './pages/Wishlist';
 import AdminDashboard from './pages/AdminDashboard';
 import { useAuthStore } from './store/authStore';
 
-const ProtectedRoute = ({ children, requireAdmin = false }: { children: JSX.Element, requireAdmin?: boolean }) => {
+const ProtectedRoute = ({ children, requireAdmin = false }: { children: React.ReactNode, requireAdmin?: boolean }) => {
   const { isAuthenticated, user, isLoading } = useAuthStore();
   
   if (isLoading) return <div>Loading...</div>;
