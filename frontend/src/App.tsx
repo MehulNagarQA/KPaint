@@ -49,7 +49,7 @@ const App: React.FC = () => {
           },
         }} 
       />
-      <div className="flex flex-col min-h-screen bg-[#0a0a0f] text-[#f0ede8]">
+      <div className="flex flex-col min-h-screen bg-black text-[#e4e6eb]">
         <Navbar />
         <main className="flex-1">
           <Routes>

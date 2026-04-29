@@ -2,10 +2,10 @@
 
 @layer base {
   :root {
-    --color-bg: #18191a;
-    --color-surface: #242526;
-    --color-surface-2: #3a3b3c;
-    --color-border: #3e4042;
+    --color-bg: #000000;
+    --color-surface: #0a0a0a;
+    --color-surface-2: #111111;
+    --color-border: #1f1f1f;
     --color-accent: #1877F2;
     --color-accent-light: #2d88ff;
     --color-text: #e4e6eb;
@@ -32,10 +32,10 @@
 
 @layer utilities {
   .glass {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(10, 10, 10, 0.85);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .gradient-text {
@@ -136,8 +136,8 @@
   }
 
   .card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
     border-radius: 1rem;
     overflow: hidden;
     transition: all 0.25s ease;

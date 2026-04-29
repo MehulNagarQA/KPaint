@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
               </button>
               
               {/* Dropdown Menu */}
-              <div className="absolute right-0 mt-2 w-48 rounded-xl bg-[#242526] border border-[#3e4042] py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all glass shadow-xl shadow-black/50">
+              <div className="absolute right-0 mt-2 w-48 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all glass shadow-xl shadow-black/50">
                 <Link to="/profile" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-[#1877F2] transition-colors">
                   <User className="w-4 h-4" /> My Profile
                 </Link>

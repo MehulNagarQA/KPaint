@@ -100,7 +100,7 @@ const Gallery: React.FC = () => {
                 name="search"
                 placeholder="Search artworks..." 
                 defaultValue={searchParams.get('search') || ''}
-                className="input-field pl-10 bg-[#242526]"
+                className="input-field pl-10 bg-[#0d0d0d]"
               />
             </div>
             
@@ -109,14 +109,14 @@ const Gallery: React.FC = () => {
               name="minPrice"
               placeholder="Min $" 
               defaultValue={searchParams.get('minPrice') || ''}
-              className="input-field bg-[#242526] w-24 hidden md:block"
+              className="input-field bg-[#0d0d0d] w-24 hidden md:block"
             />
             <input 
               type="number" 
               name="maxPrice"
               placeholder="Max $" 
               defaultValue={searchParams.get('maxPrice') || ''}
-              className="input-field bg-[#242526] w-24 hidden md:block"
+              className="input-field bg-[#0d0d0d] w-24 hidden md:block"
             />
             <button type="submit" className="hidden" />
           </form>
@@ -150,7 +150,7 @@ const Gallery: React.FC = () => {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   currentCategory === cat 
                     ? 'bg-[#1877F2] text-white' 
-                    : 'bg-[#242526] text-gray-300 border border-[#3e4042] hover:border-[#1877F2] hover:text-white'
+                    : 'bg-[#0d0d0d] text-gray-300 border border-[#3e4042] hover:border-[#1877F2] hover:text-white'
                 }`}
               >
                 {cat}
@@ -204,7 +204,7 @@ const Gallery: React.FC = () => {
           )}
         </>
       ) : (
-        <div className="text-center py-20 bg-[#18191a] rounded-2xl border border-[#3e4042]">
+        <div className="text-center py-20 bg-[#0a0a0a] rounded-2xl border border-[#3e4042]">
           <h3 className="text-2xl font-semibold text-white mb-2">No artworks found</h3>
           <p className="text-gray-400">Try adjusting your search or filters to find what you're looking for.</p>
           {(searchParams.has('search') || searchParams.has('category')) && (

@@ -45,10 +45,10 @@ const PaintingCard: React.FC<Props> = ({ painting }) => {
 
   return (
     <Link to={`/gallery/${painting._id}`} className="block group">
-      <div className="card h-full flex flex-col hover-lift bg-[#242526]">
+      <div className="card h-full flex flex-col hover-lift bg-[#0a0a0a]">
         
         {/* Image Container */}
-        <div className="relative aspect-[4/5] overflow-hidden bg-[#18191a]">
+        <div className="relative aspect-[4/5] overflow-hidden bg-black">
           <img
             src={painting.image}
             alt={painting.title}
@@ -57,7 +57,7 @@ const PaintingCard: React.FC<Props> = ({ painting }) => {
           />
           
           {/* Overlay Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#18191a] via-transparent to-transparent opacity-60"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
           
           {/* Badges */}
           <div className="absolute top-4 left-4 flex flex-col gap-2">
