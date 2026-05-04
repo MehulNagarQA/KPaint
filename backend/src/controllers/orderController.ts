@@ -144,8 +144,8 @@ export const createRazorpayOrder = async (
 
     const options = {
       amount,
-      currency: 'USD',
-      receipt: `receipt_${req.user!.id}_${Date.now()}`,
+      currency: 'INR', // Indian test accounts require INR
+      receipt: `rcpt_${Date.now()}`, // Max length is 40 chars
     };
 
     const order = await razorpay.orders.create(options);
