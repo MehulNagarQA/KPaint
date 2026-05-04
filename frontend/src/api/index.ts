@@ -65,10 +65,16 @@ export const cartAPI = {
   clear: () => api.delete('/cart/clear'),
 };
 
-// ─── Orders API ───────────────────────────────────────────────────────────────
 export const ordersAPI = {
   place: (shippingAddress: object) =>
     api.post('/orders', { shippingAddress }),
+  createRazorpayOrder: () => api.post('/orders/razorpay/create'),
+  verifyRazorpayPayment: (data: {
+    razorpay_order_id: string;
+    razorpay_payment_id: string;
+    razorpay_signature: string;
+    shippingAddress: object;
+  }) => api.post('/orders/razorpay/verify', data),
   getMyOrders: () => api.get('/orders/my'),
   getAllOrders: () => api.get('/orders'),
   updateStatus: (id: string, status: string) =>

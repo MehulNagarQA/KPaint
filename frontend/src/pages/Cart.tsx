@@ -13,6 +13,16 @@ const Cart: React.FC = () => {
   const navigate = useNavigate();
   const [placingOrder, setPlacingOrder] = useState(false);
 
+  const loadScript = (src: string) => {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
   useEffect(() => {
     if (isAuthenticated) {
       fetchCart();
@@ -44,6 +54,14 @@ const Cart: React.FC = () => {
   const handleCheckout = async () => {
     setPlacingOrder(true);
     try {
+      // 1. Load Razorpay script
+      const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+      if (!res) {
+        toast.error('Razorpay SDK failed to load. Are you online?');
+        setPlacingOrder(false);
+        return;
+      }
+
       // Basic checkout flow - mock address
       const shippingAddress = {
         street: '123 Art Avenue',
@@ -53,14 +71,57 @@ const Cart: React.FC = () => {
         country: 'USA'
       };
       
-      const { data } = await ordersAPI.place(shippingAddress);
-      if (data.success) {
-        toast.success('Order placed successfully! Welcome to your new collection.');
-        await clearCart();
-        navigate('/');
+      // 2. Create Razorpay order on backend
+      const { data } = await ordersAPI.createRazorpayOrder();
+      
+      if (!data.success) {
+        toast.error('Failed to create order');
+        setPlacingOrder(false);
+        return;
       }
-    } catch {
-      toast.error('Failed to place order');
+
+      // 3. Initialize Razorpay modal
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_mockkeyid123',
+        amount: data.order.amount,
+        currency: data.order.currency,
+        name: 'KPaint',
+        description: 'Artwork Purchase',
+        order_id: data.order.id,
+        handler: async function (response: any) {
+          try {
+            // 4. Verify payment on backend
+            const verifyRes = await ordersAPI.verifyRazorpayPayment({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              shippingAddress
+            });
+
+            if (verifyRes.data.success) {
+              toast.success('Payment successful! Welcome to your new collection.');
+              await clearCart();
+              navigate('/');
+            }
+          } catch (error) {
+            toast.error('Payment verification failed');
+          }
+        },
+        prefill: {
+          name: 'KPaint User',
+          email: 'user@example.com',
+          contact: '9999999999'
+        },
+        theme: {
+          color: '#1877F2'
+        }
+      };
+
+      const paymentObject = new (window as any).Razorpay(options);
+      paymentObject.open();
+
+    } catch (error) {
+      toast.error('Failed to initiate checkout');
     } finally {
       setPlacingOrder(false);
     }
