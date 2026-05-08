@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import About from './pages/About';
 import Gallery from './pages/Gallery';
 import ProductDetails from './pages/ProductDetails';
 import Login from './pages/Login';
@@ -54,6 +55,7 @@ const App: React.FC = () => {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/gallery/:id" element={<ProductDetails />} />
             <Route path="/login" element={<Login />} />
