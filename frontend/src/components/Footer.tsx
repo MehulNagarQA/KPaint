@@ -1,26 +1,40 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import logo from '../assets/newpainting.jpg';
+import { useAuthStore } from '../store/authStore';
 
 const Footer: React.FC = () => {
+  const { isAuthenticated } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handlePaymentClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    navigate(isAuthenticated ? '/cart' : '/login');
+  };
+
+  const handleLoginClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    navigate(isAuthenticated ? '/profile' : '/login');
+  };
+
   return (
     <footer className="border-t border-[#2a2a40] bg-[#0a0a0f] py-12 mt-20">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
-        
-        {/*  */}
+
+        {/* Brand */}
         <div className="col-span-1 md:col-span-2">
           <div className="flex items-center gap-3 mb-4">
-            <img 
-              src={logo} 
-              alt="KPaint Logo" 
-              className="w-10 h-10 object-cover rounded-lg" 
+            <img
+              src={logo}
+              alt="KPaint Logo"
+              className="w-10 h-10 object-cover rounded-lg"
             />
             <h3 className="text-2xl font-bold tracking-tighter gradient-text">
               KPaint Website for selling online paintings
             </h3>
           </div>
-
           <p className="text-gray-400 max-w-sm">
-             Premium paiting in affordable prices
+            Premium painting in affordable prices
           </p>
         </div>
 
@@ -31,8 +45,16 @@ const Footer: React.FC = () => {
             <li><a href="/gallery" className="hover:text-[#1877F2]">Gallery</a></li>
             <li><a href="#" className="hover:text-[#1877F2]">Artists</a></li>
             <li><a href="#" className="hover:text-[#1877F2]">Exhibitions</a></li>
-            <li><a href="/login" className="hover:text-[#1877F2]">Payment</a></li>
-            <li><a href="/login" className="hover:text-[#1877F2]">Login</a></li>
+            <li>
+              <a href="#" onClick={handlePaymentClick} className="hover:text-[#1877F2]">
+                Payment
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={handleLoginClick} className="hover:text-[#1877F2]">
+                {isAuthenticated ? 'My Profile' : 'Login'}
+              </a>
+            </li>
           </ul>
         </div>
 
