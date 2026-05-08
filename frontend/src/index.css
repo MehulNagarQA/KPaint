@@ -178,4 +178,52 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* ── Painting Detail Modal ─────────────────────────────────────── */
+  .painting-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: modal-overlay-in 0.3s ease forwards;
+  }
+
+  .painting-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    max-height: 90vh;
+    overflow: hidden;
+    background: #18191a;
+    border: 1px solid rgba(62, 64, 66, 0.6);
+    border-radius: 1.25rem;
+    box-shadow:
+      0 0 0 1px rgba(24, 119, 242, 0.08),
+      0 32px 80px rgba(0, 0, 0, 0.6),
+      0 0 120px rgba(24, 119, 242, 0.06);
+    animation: modal-content-in 0.35s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+
+  @keyframes modal-overlay-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes modal-content-in {
+    from {
+      opacity: 0;
+      transform: scale(0.92) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
 }
+

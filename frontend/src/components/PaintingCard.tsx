@@ -1,11 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ShoppingBag, Eye, Heart } from 'lucide-react';
 import type { Painting } from '../types';
 import { useAuthStore } from '../store/authStore';
 import { authAPI } from '../api';
 import toast from 'react-hot-toast';
 import { useCartStore } from '../store/cartStore';
+import PaintingDetailModal from './PaintingDetailModal';
 
 interface Props {
   painting: Painting;
@@ -14,11 +15,15 @@ interface Props {
 const PaintingCard: React.FC<Props> = ({ painting }) => {
   const { user, isAuthenticated, toggleWishlistIcon } = useAuthStore();
   const { addToCart } = useCartStore();
+  const [showDetail, setShowDetail] = useState(false);
+  const navigate = useNavigate();
+  const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isWishlisted = user?.wishlist?.includes(painting._id);
 
   const handleWishlist = async (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     if (!isAuthenticated) return toast.error('Please login to save to wishlist');
 
     try {
@@ -32,6 +37,7 @@ const PaintingCard: React.FC<Props> = ({ painting }) => {
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     if (!isAuthenticated) return toast.error('Please login to add to cart');
     if (painting.stock < 1) return toast.error('Painting out of stock');
 
@@ -43,66 +49,102 @@ const PaintingCard: React.FC<Props> = ({ painting }) => {
     }
   };
 
+  // Single click → navigate after delay; Double click → cancel navigate & open modal
+  const handleCardClick = () => {
+    if (clickTimer.current) {
+      clearTimeout(clickTimer.current);
+      clickTimer.current = null;
+      return; // double-click detected, skip navigation
+    }
+    clickTimer.current = setTimeout(() => {
+      clickTimer.current = null;
+      navigate(`/gallery/${painting._id}`);
+    }, 280);
+  };
+
+  const handleDoubleClick = () => {
+    if (clickTimer.current) {
+      clearTimeout(clickTimer.current);
+      clickTimer.current = null;
+    }
+    setShowDetail(true);
+  };
+
   return (
-    <Link to={`/gallery/${painting._id}`} className="block group">
-      <div className="card h-full flex flex-col hover-lift bg-[#0a0a0a]">
-        
-        {/* Image Container */}
-        <div className="relative aspect-[4/5] overflow-hidden bg-black">
-          <img
-            src={painting.image}
-            alt={painting.title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            loading="lazy"
-          />
+    <>
+      <div
+        onClick={handleCardClick}
+        onDoubleClick={handleDoubleClick}
+        className="block group cursor-pointer"
+      >
+        <div className="card h-full flex flex-col hover-lift bg-[#0a0a0a]">
           
-          {/* Overlay Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
-          
-          {/* Badges */}
-          <div className="absolute top-4 left-4 flex flex-col gap-2">
-            {painting.featured && <span className="badge badge-accent">Featured</span>}
-            {painting.stock === 0 && <span className="badge bg-red-900/80 text-red-100 accent-border">Out of Stock</span>}
-          </div>
+          {/* Image Container */}
+          <div className="relative aspect-[4/5] overflow-hidden bg-black">
+            <img
+              src={painting.image}
+              alt={painting.title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+            />
+            
+            {/* Overlay Gradients */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+            
+            {/* Badges */}
+            <div className="absolute top-4 left-4 flex flex-col gap-2">
+              {painting.featured && <span className="badge badge-accent">Featured</span>}
+              {painting.stock === 0 && <span className="badge bg-red-900/80 text-red-100 accent-border">Out of Stock</span>}
+            </div>
 
-          <button
-            onClick={handleWishlist}
-            className="absolute top-4 right-4 p-2 rounded-full glass hover:bg-white/10 transition-colors z-10"
-          >
-            <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-[#1877F2] text-[#1877F2]' : 'text-white'}`} />
-          </button>
-
-          {/* Quick Actions overlay */}
-          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
             <button
-              onClick={handleAddToCart}
-              className="btn-primary py-2 px-4 shadow-xl"
+              onClick={handleWishlist}
+              className="absolute top-4 right-4 p-2 rounded-full glass hover:bg-white/10 transition-colors z-10"
             >
-              <ShoppingBag className="w-4 h-4" /> Add
+              <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-[#1877F2] text-[#1877F2]' : 'text-white'}`} />
             </button>
-            <div className="btn-secondary py-2 px-4 shadow-xl bg-black/40 backdrop-blur-md">
-              <Eye className="w-4 h-4" /> View
-            </div>
-          </div>
-        </div>
 
-        {/* Content */}
-        <div className="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="text-xl font-bold text-white group-hover:text-[#1877F2] transition-colors line-clamp-1">{painting.title}</h3>
-              <span className="text-[#1877F2] font-bold text-lg">${painting.price.toLocaleString()}</span>
+            {/* Quick Actions overlay */}
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+              <button
+                onClick={handleAddToCart}
+                className="btn-primary py-2 px-4 shadow-xl"
+              >
+                <ShoppingBag className="w-4 h-4" /> Add
+              </button>
+              <div className="btn-secondary py-2 px-4 shadow-xl bg-black/40 backdrop-blur-md">
+                <Eye className="w-4 h-4" /> View
+              </div>
             </div>
-            <p className="text-gray-400 text-sm mb-4 line-clamp-2">{painting.description}</p>
           </div>
-          <div className="flex justify-between items-center text-sm">
-            <span className="text-gray-300 font-medium">By {painting.artist}</span>
-            <span className="text-gray-500">{painting.category}</span>
+
+          {/* Content */}
+          <div className="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-xl font-bold text-white group-hover:text-[#1877F2] transition-colors line-clamp-1">{painting.title}</h3>
+                <span className="text-[#1877F2] font-bold text-lg">${painting.price.toLocaleString()}</span>
+              </div>
+              <p className="text-gray-400 text-sm mb-4 line-clamp-2">{painting.description}</p>
+            </div>
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-gray-300 font-medium">By {painting.artist}</span>
+              <span className="text-gray-500">{painting.category}</span>
+            </div>
           </div>
         </div>
       </div>
-    </Link>
+
+      {/* Detail Modal on Double-Click */}
+      {showDetail && (
+        <PaintingDetailModal
+          painting={painting}
+          onClose={() => setShowDetail(false)}
+        />
+      )}
+    </>
   );
 };
 
 export default PaintingCard;
+
