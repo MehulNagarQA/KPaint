@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ShoppingBag, Heart, CheckCircle2, Ruler, Paintbrush } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, CheckCircle2, Ruler, Paintbrush, ZoomIn, ZoomOut } from 'lucide-react';
 import type { Painting } from '../types';
 import { paintingsAPI, authAPI } from '../api';
 import { useAuthStore } from '../store/authStore';
@@ -12,6 +12,10 @@ const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [painting, setPainting] = useState<Painting | null>(null);
   const [loading, setLoading] = useState(true);
+  const [zoomLevel, setZoomLevel] = useState(1);
+
+  const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 0.5, 3));
+  const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 0.5, 1));
 
   const { isAuthenticated, user, toggleWishlistIcon } = useAuthStore();
   const { addToCart } = useCartStore();
@@ -69,12 +73,34 @@ const ProductDetails: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
         
         {/* Left: Image Viewer */}
-        <div className="relative group rounded-2xl overflow-hidden glass border-white/5 bg-[#18191a] p-2 hover:border-[#1877F2]/30 transition-colors">
-          <img 
-            src={painting.image} 
-            alt={painting.title} 
-            className="w-full h-auto object-cover rounded-xl"
-          />
+        <div className="relative group rounded-2xl glass border-white/5 bg-[#18191a] p-2 hover:border-[#1877F2]/30 transition-colors">
+          <div className="overflow-hidden rounded-xl relative h-full flex items-center justify-center">
+            <img 
+              src={painting.image} 
+              alt={painting.title} 
+              className="w-full h-auto object-cover transition-transform duration-300 ease-out"
+              style={{ transform: `scale(${zoomLevel})` }}
+            />
+            {/* Zoom Controls */}
+            <div className="absolute bottom-4 right-4 flex gap-2 bg-black/60 p-2 rounded-lg backdrop-blur-md opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity z-10 border border-white/10">
+              <button 
+                onClick={handleZoomOut} 
+                disabled={zoomLevel <= 1}
+                className="p-1.5 text-white hover:text-[#1877F2] disabled:opacity-30 disabled:hover:text-white transition-colors bg-white/5 rounded-md hover:bg-white/10"
+                title="Zoom Out"
+              >
+                <ZoomOut className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={handleZoomIn}
+                disabled={zoomLevel >= 3}
+                className="p-1.5 text-white hover:text-[#1877F2] disabled:opacity-30 disabled:hover:text-white transition-colors bg-white/5 rounded-md hover:bg-white/10"
+                title="Zoom In"
+              >
+                <ZoomIn className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Right: Details */}
