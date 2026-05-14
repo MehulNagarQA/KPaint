@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Send, MapPin, Phone, Mail } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { enquiryAPI } from '../api';
 
 const Enquiry: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -11,16 +12,23 @@ const Enquiry: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      toast.success('Your enquiry has been sent successfully. We will get back to you soon!');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+    try {
+      const { data } = await enquiryAPI.send(formData);
+      if (data.success) {
+        toast.success(data.message || 'Your enquiry has been sent successfully. We will get back to you soon!');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        toast.error(data.message || 'Failed to send enquiry.');
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'Something went wrong. Please try again.');
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (

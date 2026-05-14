@@ -11,6 +11,7 @@ import authRoutes from './routes/authRoutes';
 import paintingRoutes from './routes/paintingRoutes';
 import cartRoutes from './routes/cartRoutes';
 import orderRoutes from './routes/orderRoutes';
+import enquiryRoutes from './routes/enquiryRoutes';
 import errorHandler from './middleware/errorHandler';
 
 const app = express();
@@ -41,6 +42,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/paintings', paintingRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/enquiry', enquiryRoutes);
 
 // Health check
 app.get('/api/health', (_req, res) => {

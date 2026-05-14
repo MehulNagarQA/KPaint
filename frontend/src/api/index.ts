@@ -81,4 +81,9 @@ export const ordersAPI = {
     api.put(`/orders/${id}/status`, { status }),
 };
 
+export const enquiryAPI = {
+  send: (data: { name: string; email: string; subject: string; message: string }) =>
+    api.post('/enquiry', data),
+};
+
 export default api;
