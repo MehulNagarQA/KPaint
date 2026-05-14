@@ -31,6 +31,7 @@ const Navbar: React.FC = () => {
           <Link to="/" className="text-gray-300 hover:text-[#1877F2] transition-colors font-medium">Home</Link>
           <Link to="/about" className="text-gray-300 hover:text-[#1877F2] transition-colors font-medium">About</Link>
           <Link to="/gallery" className="text-gray-300 hover:text-[#1877F2] transition-colors font-medium">Gallery</Link>
+          <Link to="/enquiry" className="text-gray-300 hover:text-[#1877F2] transition-colors font-medium">Enquiry</Link>
         </div>
 
         {/* Icons */}
