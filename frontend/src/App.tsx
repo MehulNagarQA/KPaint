@@ -12,6 +12,7 @@ import Register from './pages/Register';
 import Cart from './pages/Cart';
 import Profile from './pages/Profile';
 import Wishlist from './pages/Wishlist';
+import Orders from './pages/Orders';
 import AdminDashboard from './pages/AdminDashboard';
 import { useAuthStore } from './store/authStore';
 
@@ -75,6 +76,11 @@ const App: React.FC = () => {
             <Route path="/wishlist" element={
               <ProtectedRoute>
                 <Wishlist />
+              </ProtectedRoute>
+            } />
+            <Route path="/orders" element={
+              <ProtectedRoute>
+                <Orders />
               </ProtectedRoute>
             } />
             <Route path="/admin" element={

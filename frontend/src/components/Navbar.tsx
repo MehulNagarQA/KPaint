@@ -56,6 +56,9 @@ const Navbar: React.FC = () => {
                 <Link to="/profile" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-[#1877F2] transition-colors">
                   <User className="w-4 h-4" /> My Profile
                 </Link>
+                <Link to="/orders" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-[#1877F2] transition-colors">
+                  <ShoppingCart className="w-4 h-4" /> My Orders
+                </Link>
                 <Link to="/wishlist" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-[#1877F2] transition-colors">
                   <Heart className="w-4 h-4" /> Wishlist
                 </Link>
