@@ -217,6 +217,7 @@ const Cart: React.FC = () => {
                 placeholder="Street Address"
                 value={shippingAddress.street}
                 onChange={(e) => setShippingAddress({ ...shippingAddress, street: e.target.value })}
+                autoComplete="street-address"
                 className="w-full bg-[#18191a] border border-[#3e4042] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#1877F2]"
               />
               <div className="grid grid-cols-2 gap-3">
@@ -225,6 +226,7 @@ const Cart: React.FC = () => {
                   placeholder="City"
                   value={shippingAddress.city}
                   onChange={(e) => setShippingAddress({ ...shippingAddress, city: e.target.value })}
+                  autoComplete="address-level2"
                   className="w-full bg-[#18191a] border border-[#3e4042] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#1877F2]"
                 />
                 <input
@@ -232,6 +234,7 @@ const Cart: React.FC = () => {
                   placeholder="State"
                   value={shippingAddress.state}
                   onChange={(e) => setShippingAddress({ ...shippingAddress, state: e.target.value })}
+                  autoComplete="address-level1"
                   className="w-full bg-[#18191a] border border-[#3e4042] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#1877F2]"
                 />
               </div>
@@ -241,6 +244,7 @@ const Cart: React.FC = () => {
                   placeholder="Zip Code"
                   value={shippingAddress.zipCode}
                   onChange={(e) => setShippingAddress({ ...shippingAddress, zipCode: e.target.value })}
+                  autoComplete="postal-code"
                   className="w-full bg-[#18191a] border border-[#3e4042] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#1877F2]"
                 />
                 <input
@@ -248,6 +252,7 @@ const Cart: React.FC = () => {
                   placeholder="Country"
                   value={shippingAddress.country}
                   onChange={(e) => setShippingAddress({ ...shippingAddress, country: e.target.value })}
+                  autoComplete="country-name"
                   className="w-full bg-[#18191a] border border-[#3e4042] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#1877F2]"
                 />
               </div>
