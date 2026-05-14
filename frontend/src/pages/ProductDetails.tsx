@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ShoppingBag, Heart, CheckCircle2, Ruler, Paintbrush, ZoomIn, ZoomOut } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, CheckCircle2, Ruler, Paintbrush, ZoomIn, ZoomOut, X } from 'lucide-react';
 import type { Painting } from '../types';
 import { paintingsAPI, authAPI } from '../api';
 import { useAuthStore } from '../store/authStore';
@@ -13,9 +13,15 @@ const ProductDetails: React.FC = () => {
   const [painting, setPainting] = useState<Painting | null>(null);
   const [loading, setLoading] = useState(true);
   const [zoomLevel, setZoomLevel] = useState(1);
+  const [isZoomModalOpen, setIsZoomModalOpen] = useState(false);
 
-  const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 0.5, 3));
+  const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 0.5, 4));
   const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 0.5, 1));
+
+  const openZoomModal = () => {
+    setZoomLevel(1);
+    setIsZoomModalOpen(true);
+  };
 
   const { isAuthenticated, user, toggleWishlistIcon } = useAuthStore();
   const { addToCart } = useCartStore();
@@ -74,31 +80,21 @@ const ProductDetails: React.FC = () => {
         
         {/* Left: Image Viewer */}
         <div className="relative group rounded-2xl glass border-white/5 bg-[#18191a] p-2 hover:border-[#1877F2]/30 transition-colors">
-          <div className="overflow-hidden rounded-xl relative h-full flex items-center justify-center">
+          <div 
+            className="overflow-hidden rounded-xl relative h-full flex items-center justify-center cursor-pointer"
+            onDoubleClick={openZoomModal}
+            title="Double click to open full view"
+          >
             <img 
               src={painting.image} 
               alt={painting.title} 
-              className="w-full h-auto object-cover transition-transform duration-300 ease-out"
-              style={{ transform: `scale(${zoomLevel})` }}
+              className="w-full h-auto object-cover transition-transform duration-300 ease-out hover:scale-105"
             />
-            {/* Zoom Controls */}
-            <div className="absolute bottom-4 right-4 flex gap-2 bg-black/60 p-2 rounded-lg backdrop-blur-md opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity z-10 border border-white/10">
-              <button 
-                onClick={handleZoomOut} 
-                disabled={zoomLevel <= 1}
-                className="p-1.5 text-white hover:text-[#1877F2] disabled:opacity-30 disabled:hover:text-white transition-colors bg-white/5 rounded-md hover:bg-white/10"
-                title="Zoom Out"
-              >
-                <ZoomOut className="w-5 h-5" />
-              </button>
-              <button 
-                onClick={handleZoomIn}
-                disabled={zoomLevel >= 3}
-                className="p-1.5 text-white hover:text-[#1877F2] disabled:opacity-30 disabled:hover:text-white transition-colors bg-white/5 rounded-md hover:bg-white/10"
-                title="Zoom In"
-              >
-                <ZoomIn className="w-5 h-5" />
-              </button>
+            {/* Overlay hint */}
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+              <span className="text-white bg-black/60 px-4 py-2 rounded-lg backdrop-blur-sm flex items-center gap-2 font-medium">
+                <ZoomIn className="w-5 h-5" /> Double click to zoom
+              </span>
             </div>
           </div>
         </div>
@@ -166,6 +162,52 @@ const ProductDetails: React.FC = () => {
         </div>
 
       </div>
+
+      {/* Fullscreen Zoom Modal */}
+      {isZoomModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl" onClick={() => setIsZoomModalOpen(false)}>
+          <button 
+            className="absolute top-6 right-6 text-white hover:text-[#1877F2] p-2 bg-white/10 rounded-full transition-colors z-50"
+            onClick={() => setIsZoomModalOpen(false)}
+          >
+            <X className="w-6 h-6" />
+          </button>
+          
+          <div 
+            className="relative w-full h-full flex items-center justify-center overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img 
+              src={painting.image} 
+              alt={painting.title} 
+              className="max-w-[95vw] max-h-[95vh] object-contain transition-transform duration-300 ease-out"
+              style={{ transform: `scale(${zoomLevel})` }}
+            />
+          </div>
+
+          <div 
+            className="absolute bottom-8 flex gap-4 bg-black/60 p-3 rounded-xl backdrop-blur-md border border-white/10 z-50"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={handleZoomOut} 
+              disabled={zoomLevel <= 1}
+              className="p-2 text-white hover:text-[#1877F2] disabled:opacity-30 disabled:hover:text-white transition-colors bg-white/5 rounded-lg hover:bg-white/10"
+              title="Zoom Out"
+            >
+              <ZoomOut className="w-6 h-6" />
+            </button>
+            <button 
+              onClick={handleZoomIn}
+              disabled={zoomLevel >= 4}
+              className="p-2 text-white hover:text-[#1877F2] disabled:opacity-30 disabled:hover:text-white transition-colors bg-white/5 rounded-lg hover:bg-white/10"
+              title="Zoom In"
+            >
+              <ZoomIn className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
