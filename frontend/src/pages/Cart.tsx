@@ -12,6 +12,13 @@ const Cart: React.FC = () => {
   const { isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
   const [placingOrder, setPlacingOrder] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState({
+    street: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    country: ''
+  });
 
   const loadScript = (src: string) => {
     return new Promise((resolve) => {
@@ -62,14 +69,11 @@ const Cart: React.FC = () => {
         return;
       }
 
-      // Basic checkout flow - mock address
-      const shippingAddress = {
-        street: '123 Art Avenue',
-        city: 'Metropolis',
-        state: 'NY',
-        zipCode: '10001',
-        country: 'USA'
-      };
+      if (!shippingAddress.street || !shippingAddress.city || !shippingAddress.state || !shippingAddress.zipCode || !shippingAddress.country) {
+        toast.error('Please fill in all shipping address fields');
+        setPlacingOrder(false);
+        return;
+      }
       
       // 2. Create Razorpay order on backend
       const { data } = await ordersAPI.createRazorpayOrder();
@@ -202,6 +206,50 @@ const Cart: React.FC = () => {
               <div className="flex justify-between items-center text-xl font-bold">
                 <span>Total</span>
                 <span className="text-[#1877F2]">${cart.totalPrice.toLocaleString()}</span>
+              </div>
+            </div>
+
+            {/* Shipping Address Form */}
+            <div className="mb-6 space-y-3">
+              <h3 className="font-semibold text-lg text-white mb-2">Shipping Address</h3>
+              <input
+                type="text"
+                placeholder="Street Address"
+                value={shippingAddress.street}
+                onChange={(e) => setShippingAddress({ ...shippingAddress, street: e.target.value })}
+                className="w-full bg-[#18191a] border border-[#3e4042] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#1877F2]"
+              />
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  type="text"
+                  placeholder="City"
+                  value={shippingAddress.city}
+                  onChange={(e) => setShippingAddress({ ...shippingAddress, city: e.target.value })}
+                  className="w-full bg-[#18191a] border border-[#3e4042] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#1877F2]"
+                />
+                <input
+                  type="text"
+                  placeholder="State"
+                  value={shippingAddress.state}
+                  onChange={(e) => setShippingAddress({ ...shippingAddress, state: e.target.value })}
+                  className="w-full bg-[#18191a] border border-[#3e4042] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#1877F2]"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  type="text"
+                  placeholder="Zip Code"
+                  value={shippingAddress.zipCode}
+                  onChange={(e) => setShippingAddress({ ...shippingAddress, zipCode: e.target.value })}
+                  className="w-full bg-[#18191a] border border-[#3e4042] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#1877F2]"
+                />
+                <input
+                  type="text"
+                  placeholder="Country"
+                  value={shippingAddress.country}
+                  onChange={(e) => setShippingAddress({ ...shippingAddress, country: e.target.value })}
+                  className="w-full bg-[#18191a] border border-[#3e4042] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#1877F2]"
+                />
               </div>
             </div>
 
