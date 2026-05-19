@@ -19,7 +19,7 @@ export const submitEnquiry = async (
       return;
     }
 
-    const adminEmail = process.env.EMAIL_TO || process.env.SMTP_USER;
+    const adminEmail = (process.env.EMAIL_TO || process.env.SMTP_USER)?.replace('ayopmail.com', '@yopmail.com').replace('agmail.com', '@gmail.com');
 
     if (!adminEmail) {
       res.status(500).json({ success: false, message: 'Admin email not configured' });

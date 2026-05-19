@@ -11,7 +11,7 @@ const sendEmail = async (options: EmailOptions) => {
     host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: parseInt(process.env.SMTP_PORT || '587'),
     auth: {
-      user: process.env.SMTP_USER,
+      user: process.env.SMTP_USER?.replace('agmail.com', '@gmail.com'),
       pass: process.env.SMTP_PASS,
     },
     tls: {
@@ -20,7 +20,7 @@ const sendEmail = async (options: EmailOptions) => {
   });
 
   const mailOptions = {
-    from: process.env.EMAIL_FROM || process.env.SMTP_USER,
+    from: (process.env.EMAIL_FROM || process.env.SMTP_USER)?.replace('agmail.com', '@gmail.com'),
     to: options.email,
     subject: options.subject,
     text: options.message,
