@@ -44,8 +44,8 @@ ${message}
     });
 
     res.status(200).json({ success: true, message: 'Enquiry sent successfully' });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error sending enquiry email:', error);
-    res.status(500).json({ success: false, message: 'Failed to send enquiry. Please try again later.' });
+    res.status(500).json({ success: false, message: 'Failed to send enquiry. Please try again later.', error: error.message || error.toString() });
   }
 };
